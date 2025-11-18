@@ -20,7 +20,6 @@ Playlist::~Playlist() {
         curr = next;
     }
     head = nullptr;
-    track_count = 0;
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }
 
