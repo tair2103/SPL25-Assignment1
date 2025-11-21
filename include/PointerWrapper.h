@@ -37,7 +37,7 @@ public:
      * Think about ownership and resource management.
      * Is the default destructor sufficient here?
      */
-    ~PointerWrapper() =default;
+    ~PointerWrapper() { delete ptr;} //changed from: =default;
 
     // ========== COPY OPERATIONS (DELETED) ==========
 
