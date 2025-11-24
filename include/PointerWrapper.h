@@ -113,7 +113,7 @@ public:
         if(!ptr) {
             throw std::runtime_error("object in null");
         }
-        return ptr; // Placeholder
+        return ptr;
     }
 
     // ========== OWNERSHIP MANAGEMENT ==========
