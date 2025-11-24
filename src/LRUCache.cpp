@@ -1,5 +1,6 @@
 #include "LRUCache.h"
 #include <iostream>
+#include <limits>
 
 LRUCache::LRUCache(size_t capacity)
     : slots(capacity), max_size(capacity), access_counter(0) {}
@@ -18,7 +19,24 @@ AudioTrack* LRUCache::get(const std::string& track_id) {
  * TODO: Implement the put() method for LRUCache
  */
 bool LRUCache::put(PointerWrapper<AudioTrack> track) {
-    return false; // Placeholder
+    if(!track) return false;
+    
+    size_t existing_idx = findSlot(track->get_title());
+    if (existing_idx != max_size) {
+        slots[existing_idx].access(++access_counter); 
+        track.release(); 
+        return false; //no eviction
+    } 
+    size_t empty = findEmptySlot();
+    bool evicted = false; 
+
+    if(empty == max_size){
+        evicted = evictLRU();
+        empty = findEmptySlot();
+    }
+
+    slots[empty].store(std::move(track), ++access_counter);
+    return evicted; 
 }
 
 bool LRUCache::evictLRU() {
@@ -64,7 +82,17 @@ size_t LRUCache::findSlot(const std::string& track_id) const {
  * TODO: Implement the findLRUSlot() method for LRUCache
  */
 size_t LRUCache::findLRUSlot() const {
-    return 0; // Placeholder
+    uint64_t min = std::numeric_limits<uint64_t>::max();
+    size_t i = 0, index = max_size;
+    for (const CacheSlot& slot : slots){
+        uint64_t curr = slot.getLastAccessTime();
+        if(slot.isOccupied() && curr < min){
+            min = curr;
+            index = i;
+        }  
+        i++;
+    }
+    return index;
 }
 
 size_t LRUCache::findEmptySlot() const {
