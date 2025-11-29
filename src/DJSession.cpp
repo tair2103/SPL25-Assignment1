@@ -177,18 +177,6 @@ void DJSession::simulate_dj_performance() {
             std::cout << "\n--- Processing: " << track_title << " ---\n";
             stats.tracks_processed++;
             int cache_result = load_track_to_controller(track_title);
-
-            if (cache_result == 1) { 
-                stats.cache_hits++; 
-            } 
-            else if (cache_result == 0) { 
-                stats.cache_misses++; 
-            } 
-            else if (cache_result == -1) { 
-                stats.cache_misses++; 
-                stats.cache_evictions++;
-            }
-
             bool loaded = load_track_to_mixer_deck(track_title);
 
             if (loaded) {
