@@ -110,8 +110,8 @@ AudioTrack& AudioTrack::operator=(AudioTrack&& other) noexcept {
     if(this != &other){
         delete[] waveform_data;
 
-        title = other.title;
-        artists = other.artists;
+        title = std::move(other.title);
+        artists = std::move(other.artists);
         duration_seconds = other.duration_seconds;
         bpm = other.bpm;
         waveform_size = other.waveform_size;

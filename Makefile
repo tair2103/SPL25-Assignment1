@@ -31,7 +31,8 @@ SOURCES = \
 	$(SRC_DIR)/Playlist.cpp \
 	$(SRC_DIR)/SessionFileParser.cpp \
 	$(SRC_DIR)/WAVTrack.cpp \
-	$(SRC_DIR)/main.cpp
+	$(SRC_DIR)/main.cpp \
+	$(SRC_DIR)/test_full_verification.cpp 
 
 # Object files (placed in bin directory)
 OBJECTS = $(patsubst $(SRC_DIR)/%.cpp,$(BIN_DIR)/%.o,$(SOURCES))
