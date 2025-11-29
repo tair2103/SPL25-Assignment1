@@ -60,6 +60,8 @@ public:
         bpm_tolerance = tolerance;
     }
 
+    size_t get_active_deck() const { return active_deck; }
+
 };
 
 #endif // MIXINGENGINESERVICE_H
