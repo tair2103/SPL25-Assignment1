@@ -6,17 +6,27 @@
 /**
  * TODO: Implement MixingEngineService constructor
  */
-MixingEngineService::MixingEngineService()
-    : active_deck(0)
-{
-    // Your implementation here
+MixingEngineService::MixingEngineService(): active_deck(0){
+    decks[0] = nullptr;
+    decks[1] = nullptr;
+
+    auto_sync = false;
+    bpm_tolerance = 0;
+    std::cerr <<"[MixingEngineService] Initialized with 2 empty decks";
 }
 
 /**
  * TODO: Implement MixingEngineService destructor
  */
 MixingEngineService::~MixingEngineService() {
-    // Your implementation here
+    std::cerr <<"[MixingEngineService] Cleaning updecks...";
+
+    for(int i = 0; i < 2; ++i){
+        if(decks[i] != nullptr){
+            delete decks[i];
+            decks[i] = nullptr;
+        }
+    }
 }
 
 
